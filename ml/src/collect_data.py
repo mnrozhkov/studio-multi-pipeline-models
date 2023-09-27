@@ -1,6 +1,7 @@
 import argparse
+import yaml
 from io import StringIO
-from .utils import load_params
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--chunk', help='chunk of data')
@@ -10,12 +11,12 @@ args = parser.parse_args()
 
 def main():
     params = load_params(args.params)
-    collect_data(params.raw_data, args.chunk)
+    collect_data(params['base']['data_dir'], args.chunk)
 
 
-def collect_data(output_path: str, chunk: str):
-    with open(f'{output_path}/data.csv', 'a') as f:
-        for _ in range(int(chunk)):
+def collect_data(data_dir: str, chunk: str):
+    with open(f'{data_dir}/raw/data.csv', 'a') as f:
+        for _ in range(ord(chunk[0])):
             f.write(generate_line() + '\n')
 
 
@@ -32,6 +33,11 @@ def generate_random_string(length):
                 result.write(char)
     return result.getvalue()
 
+
+def load_params(filename: str):
+    with open(filename, 'r') as f:
+        params = yaml.safe_load(f)
+        return params 
 
 if __name__ == '__main__':
     main()
