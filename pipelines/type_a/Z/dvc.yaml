@@ -1,0 +1,38 @@
+artifacts:
+  type_a_Z:
+    path: ${base.model_dir}/type_a_z.file
+    type: model
+
+stages:
+  collect_data:
+    cmd: python ${base.ml_dir}/src/collect_data.py --chunk Z --params pipelines/type_a/Z/params.yaml
+    wdir: ../../../
+    params:
+      - pipelines/type_a/Z/params.yaml:
+        - base
+    deps:
+      - ${base.ml_dir}/src/collect_data.py
+    outs:
+      - ${base.data_dir}/raw/data.csv
+  process_data:
+    cmd: python ${base.ml_dir}/src/process_data.py --chunk Z --params pipelines/type_a/Z/params.yaml
+    wdir: ../../../
+    params:
+      - pipelines/type_a/Z/params.yaml:
+        - base
+    deps:
+      - ${base.ml_dir}/src/process_data.py
+      - ${base.data_dir}/raw/data.csv
+    outs:
+      - ${base.data_dir}/processed/data.csv
+  train:
+    cmd: python ${base.ml_dir}/src/train.py --type type_a --chunk Z --params pipelines/type_a/Z/params.yaml
+    wdir: ../../../
+    params:
+      - pipelines/type_a/Z/params.yaml:
+        - base
+    deps:
+      - ${base.ml_dir}/src/train.py
+      - ${base.data_dir}/processed/data.csv
+    outs:
+      - ${base.model_dir}/type_a_z.file

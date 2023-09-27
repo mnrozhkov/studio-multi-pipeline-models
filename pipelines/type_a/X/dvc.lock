@@ -11,20 +11,20 @@ stages:
       pipelines/type_a/X/params.yaml:
         base:
           ml_dir: ml
-          data_dir: data
+          data_dir: data/X
           model_dir: models
     outs:
-    - path: data/raw/data.csv
+    - path: data/X/raw/data.csv
       hash: md5
-      md5: a6964a5c03b681a8c5c6a271d8262506
-      size: 5799
+      md5: 848a58318386beaa8a0235f3da00afca
+      size: 5838
   process_data:
     cmd: python ml/src/process_data.py --chunk X --params pipelines/type_a/X/params.yaml
     deps:
-    - path: data/raw/data.csv
+    - path: data/X/raw/data.csv
       hash: md5
-      md5: a6964a5c03b681a8c5c6a271d8262506
-      size: 5799
+      md5: 848a58318386beaa8a0235f3da00afca
+      size: 5838
     - path: ml/src/process_data.py
       hash: md5
       md5: 555997f839b15e3c63b0a0d30259c576
@@ -33,20 +33,20 @@ stages:
       pipelines/type_a/X/params.yaml:
         base:
           ml_dir: ml
-          data_dir: data
+          data_dir: data/X
           model_dir: models
     outs:
-    - path: data/processed/data.csv
+    - path: data/X/processed/data.csv
       hash: md5
-      md5: 5e6d8790fe23846886e0faa7dd1763db
-      size: 1509
+      md5: 40c28f42472f4c6bbd3910cf0ad0a5aa
+      size: 1610
   train:
     cmd: python ml/src/train.py --type type_a --chunk X --params pipelines/type_a/X/params.yaml
     deps:
-    - path: data/processed/data.csv
+    - path: data/X/processed/data.csv
       hash: md5
-      md5: 5e6d8790fe23846886e0faa7dd1763db
-      size: 1509
+      md5: 40c28f42472f4c6bbd3910cf0ad0a5aa
+      size: 1610
     - path: ml/src/train.py
       hash: md5
       md5: 901f4842f49421a82e6ef0f579774b9b
@@ -55,10 +55,10 @@ stages:
       pipelines/type_a/X/params.yaml:
         base:
           ml_dir: ml
-          data_dir: data
+          data_dir: data/X
           model_dir: models
     outs:
     - path: models/type_a_x.file
       hash: md5
-      md5: 569fed0807860194f3124140a6a665b7
-      size: 1417
+      md5: 0ceceaa3ad66d93ae838765534d0db9a
+      size: 1514
