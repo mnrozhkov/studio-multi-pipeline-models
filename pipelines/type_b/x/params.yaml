@@ -1,0 +1,5 @@
+base:
+  division: x
+  ml_dir: ml
+  data_dir: data/type_b
+  model_dir: models/type_b

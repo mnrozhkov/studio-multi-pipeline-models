@@ -11,14 +11,19 @@ args = parser.parse_args()
 
 def main():
     params = load_params(args.params)
-    process_data(params['base']['data_dir'], args.chunk)
+    
+    data_dir = f"{params['base']['data_dir']}/{params['base']['division']}"
+    # print(data_dir)
+    
+    process_data(data_dir, args.chunk)
 
 
 def process_data(data_dir: str, chunk: str):
     df = pd.read_csv(f'{data_dir}/raw/data.csv', header=None)
-    for index, row in df.iterrows():
-        if not any(chunk in str(cell) for cell in row):
-            df.drop(index, inplace=True)
+    # print(df.head())
+    # for index, row in df.iterrows():
+    #     if not any(chunk in str(cell) for cell in row):
+    #         df.drop(index, inplace=True)
     df.to_csv(f'{data_dir}/processed/data.csv', header=False, index=False)
 
 

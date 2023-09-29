@@ -5,7 +5,9 @@ artifacts:
 
 stages:
   collect_data:
-    cmd: python ${base.ml_dir}/src/collect_data.py --chunk x --params pipelines/type_a/x/params.yaml
+    cmd: 
+    - echo "base.ml_dir"
+    # - python ${base.ml_dir}/src/collect_data.py --chunk x --params pipelines/type_a/x/params.yaml
     wdir: ../../../
     params:
       - pipelines/type_a/x/params.yaml:

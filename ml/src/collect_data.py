@@ -11,11 +11,14 @@ args = parser.parse_args()
 
 def main():
     params = load_params(args.params)
-    collect_data(params['base']['data_dir'], args.chunk)
+    data_dir = f"{params['base']['data_dir']}/{params['base']['division']}/raw"
+    print(data_dir)
+    collect_data(data_dir, args.chunk)
 
 
 def collect_data(data_dir: str, chunk: str):
-    with open(f'{data_dir}/raw/data.csv', 'a') as f:
+    
+    with open(f'{data_dir}/data.csv', 'a') as f:
         for _ in range(ord(chunk[0])):
             f.write(generate_line() + '\n')
 

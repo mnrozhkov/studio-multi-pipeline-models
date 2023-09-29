@@ -13,7 +13,11 @@ args = parser.parse_args()
 
 def main():
     params = load_params(args.params)
-    train(params['base']['data_dir'], params['base']['model_dir'], args.type, args.chunk)
+    
+    data_dir = f"{params['base']['data_dir']}/{params['base']['division']}"
+    print(data_dir)
+    
+    train(data_dir, params['base']['model_dir'], args.type, args.chunk)
 
 
 def train(processed_data: str, model_dir: str, model_type: str, chunk: str):
