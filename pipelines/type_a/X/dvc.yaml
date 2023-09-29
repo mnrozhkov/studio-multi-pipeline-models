@@ -6,8 +6,8 @@ artifacts:
 stages:
   collect_data:
     cmd: 
-    - echo "base.ml_dir"
-    # - python ${base.ml_dir}/src/collect_data.py --chunk x --params pipelines/type_a/x/params.yaml
+    - mkdir -p ${base.data_dir}/${base.division}/raw
+    - python ${base.ml_dir}/src/collect_data.py --chunk x --params pipelines/type_a/x/params.yaml
     wdir: ../../../
     params:
       - pipelines/type_a/x/params.yaml:
@@ -15,7 +15,7 @@ stages:
     deps:
       - ${base.ml_dir}/src/collect_data.py
     outs:
-      - ${base.data_dir}/raw/data.csv
+      - ${base.data_dir}/${base.division}/raw/data.csv
   process_data:
     cmd: python ${base.ml_dir}/src/process_data.py --chunk x --params pipelines/type_a/x/params.yaml
     wdir: ../../../
@@ -24,9 +24,9 @@ stages:
         - base
     deps:
       - ${base.ml_dir}/src/process_data.py
-      - ${base.data_dir}/raw/data.csv
+      - ${base.data_dir}/${base.division}/raw/data.csv
     outs:
-      - ${base.data_dir}/processed/data.csv
+      - ${base.data_dir}/${base.division}/processed/data.csv
   train:
     cmd: python ${base.ml_dir}/src/train.py --type type_a --chunk x --params pipelines/type_a/x/params.yaml
     wdir: ../../../
@@ -35,6 +35,6 @@ stages:
         - base
     deps:
       - ${base.ml_dir}/src/train.py
-      - ${base.data_dir}/processed/data.csv
+      - ${base.data_dir}/${base.division}/processed/data.csv
     outs:
       - ${base.model_dir}/type_a_x.file
