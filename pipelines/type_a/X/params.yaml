@@ -1,5 +1,0 @@
-base:
-  ml_dir: ml
-  division: x
-  data_dir: data
-  model_dir: models

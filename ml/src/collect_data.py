@@ -4,22 +4,22 @@ from io import StringIO
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--chunk', help='chunk of data')
+parser.add_argument('--target', help='target of data')
 parser.add_argument('--params', help='path to params.yaml')
 args = parser.parse_args()
 
 
 def main():
     params = load_params(args.params)
-    data_dir = f"{params['base']['data_dir']}/{params['base']['division']}/raw"
+    data_dir = f"{params['data_dir']}/{params['target']}/raw"
     print(data_dir)
-    collect_data(data_dir, args.chunk)
+    collect_data(data_dir, args.target)
 
 
-def collect_data(data_dir: str, chunk: str):
+def collect_data(data_dir: str, target: str):
     
     with open(f'{data_dir}/data.csv', 'a') as f:
-        for _ in range(ord(chunk[0])):
+        for _ in range(ord(target[0])):
             f.write(generate_line() + '\n')
 
 
