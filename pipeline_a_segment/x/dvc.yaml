@@ -1,6 +1,6 @@
 artifacts:
   pipeline_a_segment_model:
-    path: pipeline_a_segment/${target}/${model_dir}/model_pipeline_a_segment_${target}.file
+    path: pipeline_a_segment/${target}/${model_dir}/model_pipeline_a_segment_${target}_UPPER.file
     type: model
 
 stages:
@@ -43,5 +43,5 @@ stages:
       - ml/src/train.py
       - ${data_dir}/${target}/processed/data.csv
     outs:
-      - pipeline_a_segment/${target}/${model_dir}/model_pipeline_a_segment_${target}.file:
+      - pipeline_a_segment/${target}/${model_dir}/model_pipeline_a_segment_${target}_UPPER.file:
           cache: false

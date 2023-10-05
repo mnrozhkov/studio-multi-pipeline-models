@@ -15,8 +15,8 @@ stages:
     outs:
     - path: data/a_segment/x/raw/data.csv
       hash: md5
-      md5: a59f690baea08af3c79cb8c1e1990166
-      size: 7931
+      md5: 2d0dba3afb00131ba8ed989a887f6ad1
+      size: 7922
   process_data:
     cmd:
     - mkdir -p data/a_segment/x/processed
@@ -24,8 +24,8 @@ stages:
     deps:
     - path: data/a_segment/x/raw/data.csv
       hash: md5
-      md5: a59f690baea08af3c79cb8c1e1990166
-      size: 7931
+      md5: 2d0dba3afb00131ba8ed989a887f6ad1
+      size: 7922
     - path: ml/src/process_data.py
       hash: md5
       md5: 52b38150b3d1a9d87001eddb33c21f81
@@ -36,15 +36,15 @@ stages:
     outs:
     - path: data/a_segment/x/processed/data.csv
       hash: md5
-      md5: a59f690baea08af3c79cb8c1e1990166
-      size: 7931
+      md5: 2d0dba3afb00131ba8ed989a887f6ad1
+      size: 7922
   train:
     cmd: python ml/src/train.py --type pipeline_a_segment --target x --params pipeline_a_segment/x/params.yaml
     deps:
     - path: data/a_segment/x/processed/data.csv
       hash: md5
-      md5: a59f690baea08af3c79cb8c1e1990166
-      size: 7931
+      md5: 2d0dba3afb00131ba8ed989a887f6ad1
+      size: 7922
     - path: ml/src/train.py
       hash: md5
       md5: db3846d63e74681eab2922ca69436ea6
@@ -58,5 +58,5 @@ stages:
     outs:
     - path: pipeline_a_segment/x/models/model_pipeline_a_segment_x.file
       hash: md5
-      md5: 09ff3013439d01231ba33cee5e8bf34e
-      size: 7451
+      md5: daca5e0ad4fbf092918a5aa9069dc927
+      size: 7442
